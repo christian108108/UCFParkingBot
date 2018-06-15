@@ -1,4 +1,4 @@
-﻿namespace Parking_Bot_.NET
+﻿namespace UCFParkingBot
 {
     using HtmlAgilityPack;
     using System;
@@ -44,7 +44,7 @@
 
             List<string> listOfStrings = new List<string>();
 
-            listOfStrings.Add("Spots free:");
+            listOfStrings.Add("Spots available:");
             foreach (KeyValuePair<string, int> kvp in garagesAndCounts)
             {
                 listOfStrings.Add($"{kvp.Key}: {kvp.Value}");
@@ -53,7 +53,7 @@
             string output = string.Join("\n", listOfStrings);
 
             Console.WriteLine(output);
-
+            Console.ReadKey();
         }
     }
 }
