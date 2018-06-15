@@ -53,7 +53,6 @@
             string output = string.Join("\n", listOfStrings);
 
             Console.WriteLine(output);
-            Console.ReadKey();
         }
     }
 }
