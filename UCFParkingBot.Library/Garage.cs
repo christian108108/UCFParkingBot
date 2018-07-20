@@ -5,7 +5,7 @@
         public string Name { get; set; }
         public int MaxSpots { get; set; }
         public int SpotsAvailable { get; set; }
-        public decimal PercentAvailable { get; }
+        public decimal PercentAvailable { get; set; }
 
         public Garage(string name, int maxSpots, int spotsAvailable = 0)
         {

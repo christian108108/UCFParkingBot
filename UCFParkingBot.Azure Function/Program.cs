@@ -1,15 +1,13 @@
 namespace UCFParkingBot.AzureFunction
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using HtmlAgilityPack;
     using Microsoft.Azure.WebJobs;
     using Microsoft.Azure.WebJobs.Host;
     using Tweetinvi;
     using Microsoft.Azure.KeyVault;
     using Microsoft.Azure.KeyVault.Models;
     using Microsoft.Azure.Services.AppAuthentication;
+    using UCFParkingBot.Library;
 
 
     public class Garage
@@ -28,7 +26,7 @@ namespace UCFParkingBot.AzureFunction
         }
     }
 
-    public static class UCFParkingBot
+    public static class Program
     {
         public static SecretBundle CONSUMER_KEY { get; private set; }
         public static SecretBundle CONSUMER_SECRET { get; private set; }
@@ -37,57 +35,19 @@ namespace UCFParkingBot.AzureFunction
         public static string KEY_VAULT_NAME = Properties.Resources.keyVaultName;
 
         [FunctionName("TweetSpotsAvailable")]
-        public static async System.Threading.Tasks.Task RunAsync([TimerTrigger("0 */15 * * * *")]TimerInfo myTimer, TraceWriter log)
+        public static async System.Threading.Tasks.Task RunAsync([TimerTrigger("0 * * * * *")]TimerInfo myTimer, TraceWriter log)
         {
-            var html = @"https://secure.parking.ucf.edu/GarageCount/";
+            var parkingData = new ParkingDataFunctions();
+            parkingData.SetParkingData();
+            string output = parkingData.ToString();
 
-            HtmlWeb web = new HtmlWeb();
-
-            var htmlDoc = web.Load(html);
-
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//strong");
-
-            List<Garage> garages = new List<Garage>
-            {
-                new Garage( "Garage A", 1623 ),
-                new Garage( "Garage B", 1259 ),
-                new Garage( "Garage C", 1852 ),
-                new Garage( "Garage D", 1241 ),
-                new Garage( "Garage H", 1284 ),
-                new Garage( "Garage I", 1231 ),
-                new Garage( "Libra Garage", 1007 )
-            };
-
-            int i = 0;
-            foreach (var node in nodes)
-            {
-                if (node.NodeType == HtmlNodeType.Element)
-                {
-                    int.TryParse(node.InnerText, out int spotsAvailable);
-                    garages[i].SpotsAvailable = spotsAvailable;
-                    garages[i].PercentAvailable = (decimal)garages[i].SpotsAvailable / garages[i].MaxSpots * 100;
-                }
-                i++;
-            }
-
-            List<string> listOfStrings = new List<string>
-            {
-                "Spots available"
-            };
-
-            foreach (Garage garage in garages)
-            {
-                listOfStrings.Add($"{garage.Name}: {garage.SpotsAvailable}");
-            }
-
-            string output = string.Join("\n", listOfStrings);
-
+            var garages = parkingData.Garages;
             //log.Info($"\n{output}");
 
 
 
             //If there are only 10% or fewer spots left, tweet!
-            if ( garages.Min( garage => garage.PercentAvailable ) < 10 )
+            if ( parkingData.LeastAvailableGarage().PercentAvailable < 100 )
             {
                 //get Twitter API keys from Key Vault
                 await GetTwitterKeysAsync();                
