@@ -41,6 +41,11 @@ namespace UCFParkingBot.AzureFunction
                 Tweet.PublishTweet(output);
                 log.Info($"Tweet published at {DateTime.UtcNow}!");
             }
+            else
+            {
+                Garage least = parkingData.LeastAvailableGarage();
+                log.Info($"Tweet not published at {DateTime.UtcNow}. Garage with least availability: {least.Name} with {least.PercentAvailable.ToString("F")}%");
+            }
         }
 
         /// <summary>
