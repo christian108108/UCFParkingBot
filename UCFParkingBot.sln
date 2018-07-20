@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCFParkingBot", "UCFParking
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCFParkingBot.AzureFunction", "UCFParkingBot.AzureFunction\UCFParkingBot.AzureFunction.csproj", "{C5D46FE4-01CF-4A3D-92DF-85D13ED02FE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCFParkingBot.Library", "UCFParkingBot.Library\UCFParkingBot.Library.csproj", "{B41999B6-4233-48E9-9F67-5D4DE3DE046B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C5D46FE4-01CF-4A3D-92DF-85D13ED02FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5D46FE4-01CF-4A3D-92DF-85D13ED02FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5D46FE4-01CF-4A3D-92DF-85D13ED02FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B41999B6-4233-48E9-9F67-5D4DE3DE046B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B41999B6-4233-48E9-9F67-5D4DE3DE046B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B41999B6-4233-48E9-9F67-5D4DE3DE046B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B41999B6-4233-48E9-9F67-5D4DE3DE046B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
