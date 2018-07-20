@@ -69,7 +69,7 @@ namespace UCFParkingBot.Library
             return output;
         }
 
-        public Garage GetMostAvailableGarage()
+        public Garage MostAvailableGarage()
         {
             if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
             {
@@ -88,7 +88,7 @@ namespace UCFParkingBot.Library
             return mostAvailable;
         }
 
-        public Garage GetLeastAvailableGarage()
+        public Garage LeastAvailableGarage()
         {
             if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
             {
