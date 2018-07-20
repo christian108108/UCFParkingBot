@@ -9,10 +9,15 @@
 
         public Garage(string name, int maxSpots, int spotsAvailable = 0)
         {
-            Name = name;
-            MaxSpots = maxSpots;
-            SpotsAvailable = spotsAvailable;
-            PercentAvailable = (decimal)SpotsAvailable / MaxSpots * 100;
+            this.Name = name;
+            this.MaxSpots = maxSpots;
+            this.SpotsAvailable = spotsAvailable;
+            SetPercentAvailable();
+        }
+
+        public void SetPercentAvailable()
+        {
+            this.PercentAvailable = (decimal)SpotsAvailable / MaxSpots * 100;
         }
     }
 }
