@@ -9,23 +9,6 @@ namespace UCFParkingBot.AzureFunction
     using Microsoft.Azure.Services.AppAuthentication;
     using UCFParkingBot.Library;
 
-
-    public class Garage
-    {
-        public string Name { get; set; }
-        public int MaxSpots { get; set; }
-        public int SpotsAvailable { get; set; }
-        public decimal PercentAvailable { get; set; }
-
-        public Garage(string name, int maxSpots, int spotsAvailable = 0, decimal percentAvailable = 0)
-        {
-            Name = name;
-            MaxSpots = maxSpots;
-            SpotsAvailable = spotsAvailable;
-            PercentAvailable = percentAvailable;
-        }
-    }
-
     public static class Program
     {
         public static SecretBundle CONSUMER_KEY { get; private set; }
@@ -35,7 +18,7 @@ namespace UCFParkingBot.AzureFunction
         public static string KEY_VAULT_NAME = Properties.Resources.keyVaultName;
 
         [FunctionName("TweetSpotsAvailable")]
-        public static async System.Threading.Tasks.Task RunAsync([TimerTrigger("0 * * * * *")]TimerInfo myTimer, TraceWriter log)
+        public static async System.Threading.Tasks.Task RunAsync([TimerTrigger("0 */15 * * * *")]TimerInfo myTimer, TraceWriter log)
         {
             var parkingData = new ParkingDataFunctions();
             parkingData.SetParkingData();
