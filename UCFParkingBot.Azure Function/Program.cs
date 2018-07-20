@@ -30,7 +30,7 @@ namespace UCFParkingBot.AzureFunction
 
 
             //If there are only 10% or fewer spots left, tweet!
-            if ( parkingData.LeastAvailableGarage().PercentAvailable < 100 )
+            if ( parkingData.LeastAvailableGarage().PercentAvailable < 10 )
             {
                 //get Twitter API keys from Key Vault
                 await GetTwitterKeysAsync();                
@@ -39,7 +39,7 @@ namespace UCFParkingBot.AzureFunction
                 Auth.SetUserCredentials(CONSUMER_KEY.Value, CONSUMER_SECRET.Value, ACCESS_TOKEN.Value, ACCESS_TOKEN_SECRET.Value);
 
                 Tweet.PublishTweet(output);
-                log.Info($"Tweeted at {DateTime.UtcNow}!");
+                log.Info($"Tweet published at {DateTime.UtcNow}!");
             }
         }
 
