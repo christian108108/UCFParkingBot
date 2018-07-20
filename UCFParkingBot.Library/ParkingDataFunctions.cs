@@ -13,7 +13,7 @@ namespace UCFParkingBot.Library
         /// </summary>
         public void SetParkingData()
         {
-            var html = @"https://secure.parking.ucf.edu/GarageCount/";
+            string html = @"https://secure.parking.ucf.edu/GarageCount/";
 
             HtmlWeb web = new HtmlWeb();
 
