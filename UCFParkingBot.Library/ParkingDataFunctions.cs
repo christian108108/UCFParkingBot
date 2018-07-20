@@ -49,32 +49,29 @@ namespace UCFParkingBot.Library
 
         public override string ToString()
         {
-            if (this.garages != null)
+            if (this.garages == default(List<Garage>) || this.garages.Count == 0)
             {
-                List<string> listOfStrings = new List<string>
-                {
-                    "Spots available"
-                };
-
-                foreach (Garage garage in garages)
-                {
-                    listOfStrings.Add($"{garage.Name}: {garage.SpotsAvailable}");
-                }
-
-                string output = string.Join("\n", listOfStrings);
-
-                return output;
+                throw new InvalidOperationException("Parking data has not yet been set.");
             }
 
-            else
+            List<string> listOfStrings = new List<string>
             {
-                return "";
+                "Spots available"
+            };
+
+            foreach (Garage garage in garages)
+            {
+                listOfStrings.Add($"{garage.Name}: {garage.SpotsAvailable}");
             }
+
+            string output = string.Join("\n", listOfStrings);
+
+            return output;
         }
 
         public Garage GetMostAvailableGarage()
         {
-            if (garages != default(List<Garage>) || garages.Count == 0)
+            if (this.garages == default(List<Garage>) || garages.Count == 0)
             {
                 throw new InvalidOperationException("Garage data has not yet been set");
             }
@@ -93,7 +90,7 @@ namespace UCFParkingBot.Library
 
         public Garage GetLeastAvailableGarage()
         {
-            if (garages != default(List<Garage>) || garages.Count == 0)
+            if (this.garages == default(List<Garage>) || garages.Count == 0)
             {
                 throw new InvalidOperationException("Garage data has not yet been set");
             }
