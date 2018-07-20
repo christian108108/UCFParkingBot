@@ -5,14 +5,14 @@
         public string Name { get; set; }
         public int MaxSpots { get; set; }
         public int SpotsAvailable { get; set; }
-        public decimal PercentAvailable { get; set; }
+        public decimal PercentAvailable { get; }
 
-        public Garage(string name, int maxSpots, int spotsAvailable = 0, decimal percentAvailable = 0)
+        public Garage(string name, int maxSpots, int spotsAvailable = 0)
         {
             Name = name;
             MaxSpots = maxSpots;
             SpotsAvailable = spotsAvailable;
-            PercentAvailable = percentAvailable;
+            PercentAvailable = (decimal)SpotsAvailable / MaxSpots * 100;
         }
     }
 }

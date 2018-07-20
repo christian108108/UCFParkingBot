@@ -39,7 +39,6 @@ namespace UCFParkingBot.Library
                 {
                     int.TryParse(node.InnerText, out int spotsAvailable);
                     garages[i].SpotsAvailable = spotsAvailable;
-                    garages[i].PercentAvailable = (decimal)garages[i].SpotsAvailable / garages[i].MaxSpots * 100;
                 }
                 i++;
             }
