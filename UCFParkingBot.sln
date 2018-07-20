@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCFParkingBot.Library", "UCFParkingBot.Library\UCFParkingBot.Library.csproj", "{B41999B6-4233-48E9-9F67-5D4DE3DE046B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCFParkingBot.Library", "UCFParkingBot.Library\UCFParkingBot.Library.csproj", "{1AEF0C23-F347-4C9E-8240-613D9B493D9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCFParkingBot.AzureFunction", "UCFParkingBot.Azure Function\UCFParkingBot.AzureFunction.csproj", "{333A2A08-22DA-4381-93C6-137278AF45C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCFParkingBot.Twitter", "UCFParkingBot.Twitter\UCFParkingBot.Twitter.csproj", "{A54865F9-F858-46D9-B1BC-F210A081B5A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B41999B6-4233-48E9-9F67-5D4DE3DE046B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B41999B6-4233-48E9-9F67-5D4DE3DE046B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B41999B6-4233-48E9-9F67-5D4DE3DE046B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B41999B6-4233-48E9-9F67-5D4DE3DE046B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{333A2A08-22DA-4381-93C6-137278AF45C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{333A2A08-22DA-4381-93C6-137278AF45C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{333A2A08-22DA-4381-93C6-137278AF45C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{333A2A08-22DA-4381-93C6-137278AF45C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AEF0C23-F347-4C9E-8240-613D9B493D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AEF0C23-F347-4C9E-8240-613D9B493D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AEF0C23-F347-4C9E-8240-613D9B493D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AEF0C23-F347-4C9E-8240-613D9B493D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A54865F9-F858-46D9-B1BC-F210A081B5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A54865F9-F858-46D9-B1BC-F210A081B5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A54865F9-F858-46D9-B1BC-F210A081B5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A54865F9-F858-46D9-B1BC-F210A081B5A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
