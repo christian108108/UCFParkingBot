@@ -6,7 +6,7 @@ namespace UCFParkingBot.Library
 {
     public class ParkingDataFunctions
     {
-        public List<Garage> garages { get; set; }
+        public List<Garage> Garages { get; set; }
 
         /// <summary>
         /// Sets parking data as a list of Garage objects with the appropriate data
@@ -44,12 +44,12 @@ namespace UCFParkingBot.Library
                 i++;
             }
 
-            this.garages = garages;
+            this.Garages = garages;
         }
 
         public override string ToString()
         {
-            if (this.garages == default(List<Garage>) || this.garages.Count == 0)
+            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
             {
                 throw new InvalidOperationException("Parking data has not yet been set.");
             }
@@ -59,7 +59,7 @@ namespace UCFParkingBot.Library
                 "Spots available"
             };
 
-            foreach (Garage garage in garages)
+            foreach (Garage garage in this.Garages)
             {
                 listOfStrings.Add($"{garage.Name}: {garage.SpotsAvailable}");
             }
@@ -71,13 +71,13 @@ namespace UCFParkingBot.Library
 
         public Garage GetMostAvailableGarage()
         {
-            if (this.garages == default(List<Garage>) || garages.Count == 0)
+            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
             {
                 throw new InvalidOperationException("Garage data has not yet been set");
             }
 
-            Garage mostAvailable = garages[0];
-            foreach (Garage g in garages)
+            Garage mostAvailable = this.Garages[0];
+            foreach (Garage g in this.Garages)
             {
                 if (g.PercentAvailable > mostAvailable.PercentAvailable)
                 {
@@ -90,13 +90,13 @@ namespace UCFParkingBot.Library
 
         public Garage GetLeastAvailableGarage()
         {
-            if (this.garages == default(List<Garage>) || garages.Count == 0)
+            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
             {
                 throw new InvalidOperationException("Garage data has not yet been set");
             }
 
-            Garage leastAvailable = garages[0];
-            foreach (Garage g in garages)
+            Garage leastAvailable = this.Garages[0];
+            foreach (Garage g in this.Garages)
             {
                 if (g.PercentAvailable < leastAvailable.PercentAvailable)
                 {
