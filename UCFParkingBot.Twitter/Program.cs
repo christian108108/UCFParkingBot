@@ -29,7 +29,7 @@ namespace UCFParkingBot.Twitter
 
 
             //If there are only 10% or fewer spots left, tweet!
-            if ( parkingData.GetLeastAvailableGarage().PercentAvailable < 10 )
+            if ( parkingData.GetLeastAvailableGarageByPercentage().PercentAvailable < 10 )
             {
                 //get Twitter API keys from Key Vault
                 await GetTwitterKeysAsync();                
@@ -42,7 +42,7 @@ namespace UCFParkingBot.Twitter
             }
             else
             {
-                Garage least = parkingData.GetLeastAvailableGarage();
+                Garage least = parkingData.GetLeastAvailableGarageByPercentage();
                 log.Info($"Tweet not published at {DateTime.UtcNow}. Garage with least availability: {least.Name} with {least.PercentAvailable.ToString("F")}%");
             }
         }

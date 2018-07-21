@@ -97,7 +97,36 @@ namespace UCFParkingBot.Library
             return mostAvailable;
         }
 
-        public Garage GetLeastAvailableGarage()
+        /// <summary>
+        /// Gets most available garage based off of spots
+        /// </summary>
+        /// <example>Garage with 500 spots free, when all other garages have fewer than 500 spots free.</example>
+        /// <returns>Garage object with the highest availability by spots</returns>
+        public Garage GetMostAvailableGarageBySpots()
+        {
+            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
+            {
+                throw new InvalidOperationException("Parking data has not yet been set. Please use SetParkingData() before using this method.");
+            }
+
+            Garage mostAvailable = this.Garages[0];
+            foreach (Garage g in this.Garages)
+            {
+                if (g.SpotsAvailable > mostAvailable.SpotsAvailable)
+                {
+                    mostAvailable = g;
+                }
+            }
+
+            return mostAvailable;
+        }
+
+        /// <summary>
+        /// Gets least available garage based off of percentage
+        /// </summary>
+        /// <example>Garage with 8% spots free, when all other garages have more than 8% spots free.</example>
+        /// <returns>Garage object with the lowest availability by percentage</returns>
+        public Garage GetLeastAvailableGarageByPercentage()
         {
             if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
             {
@@ -108,6 +137,30 @@ namespace UCFParkingBot.Library
             foreach (Garage g in this.Garages)
             {
                 if (g.PercentAvailable < leastAvailable.PercentAvailable)
+                {
+                    leastAvailable = g;
+                }
+            }
+
+            return leastAvailable;
+        }
+
+        /// <summary>
+        /// Gets least available garage based off of spots
+        /// </summary>
+        /// <example>Garage with 10 spots free, when all other garages have more than 10 spots free.</example>
+        /// <returns>Garage object with the lowest availability by spots</returns>
+        public Garage GetLeastAvailableGarageBySpots()
+        {
+            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
+            {
+                throw new InvalidOperationException("Parking data has not yet been set. Please use SetParkingData() before using this method.");
+            }
+
+            Garage leastAvailable = this.Garages[0];
+            foreach (Garage g in this.Garages)
+            {
+                if (g.SpotsAvailable < leastAvailable.SpotsAvailable)
                 {
                     leastAvailable = g;
                 }
