@@ -2,9 +2,9 @@
 {
     public class Garage
     {
-        public string Name { get; set; }
-        public int MaxSpots { get; set; }
-        public int SpotsAvailable { get; set; }
+        public readonly string Name;
+        public readonly int MaxSpots;
+        public int SpotsAvailable;
         public decimal PercentAvailable { get; private set; }
 
         public Garage(string name, int maxSpots, int spotsAvailable = 0)
