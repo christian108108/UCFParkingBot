@@ -38,12 +38,12 @@ namespace UCFParkingBot.Twitter
                 Auth.SetUserCredentials(CONSUMER_KEY.Value, CONSUMER_SECRET.Value, ACCESS_TOKEN.Value, ACCESS_TOKEN_SECRET.Value);
 
                 Tweet.PublishTweet(output);
-                log.Info($"Tweet published at {DateTime.UtcNow}!");
+                log.Info($"Tweet published at {DateTime.UtcNow} UTC!");
             }
             else
             {
                 Garage least = parkingData.GetLeastAvailableGarageByPercentage();
-                log.Info($"Tweet not published at {DateTime.UtcNow}. Garage with least availability: {least.Name} with {least.PercentAvailable.ToString("F")}%");
+                log.Info($"Tweet not published at {DateTime.UtcNow} UTC. Garage with least availability: {least.Name} with {least.PercentAvailable.ToString("F")}% of spots free.");
             }
         }
 
