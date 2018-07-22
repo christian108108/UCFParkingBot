@@ -11,10 +11,10 @@ namespace UCFParkingBot.Twitter
 
     public static class Program
     {
-        public static SecretBundle CONSUMER_KEY { get; private set; }
-        public static SecretBundle CONSUMER_SECRET { get; private set; }
-        public static SecretBundle ACCESS_TOKEN { get; private set; }
-        public static SecretBundle ACCESS_TOKEN_SECRET { get; private set; }
+        private static SecretBundle CONSUMER_KEY { get; set; }
+        private static SecretBundle CONSUMER_SECRET { get; set; }
+        private static SecretBundle ACCESS_TOKEN { get; set; }
+        private static SecretBundle ACCESS_TOKEN_SECRET { get; set; }
 
         [FunctionName("TweetSpotsAvailable")]
         public static async System.Threading.Tasks.Task RunAsync([TimerTrigger("0 */15 * * * *")]TimerInfo myTimer, TraceWriter log)
@@ -32,7 +32,7 @@ namespace UCFParkingBot.Twitter
             if ( parkingData.GetLeastAvailableGarageByPercentage().PercentAvailable < 10 )
             {
                 //get Twitter API keys from Key Vault
-                await GetTwitterKeysAsync();                
+                await SetTwitterKeysAsync();                
 
                 //authenticate with Twitter
                 Auth.SetUserCredentials(CONSUMER_KEY.Value, CONSUMER_SECRET.Value, ACCESS_TOKEN.Value, ACCESS_TOKEN_SECRET.Value);
@@ -51,7 +51,7 @@ namespace UCFParkingBot.Twitter
         /// Gets Twitter API keys from Azure Key Vault and sets them for Twitter to be able to use them
         /// </summary>
         /// <returns>void</returns>
-        public static async System.Threading.Tasks.Task GetTwitterKeysAsync()
+        public static async System.Threading.Tasks.Task SetTwitterKeysAsync()
         {
             // authenticating with Azure Managed Service Identity
             AzureServiceTokenProvider azureServiceTokenProvider = new AzureServiceTokenProvider();
