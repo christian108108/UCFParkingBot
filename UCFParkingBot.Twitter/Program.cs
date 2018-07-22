@@ -43,7 +43,7 @@ namespace UCFParkingBot.Twitter
             else
             {
                 Garage least = parkingData.GetLeastAvailableGarageByPercentage();
-                log.Info($"Tweet not published at {DateTime.UtcNow} UTC. Garage with least availability: {least.Name} with {least.PercentAvailable.ToString("F")}% of spots free.");
+                log.Info($"Tweet not published at {DateTime.UtcNow} UTC. Garage with least availability: {least.Name} with {least.PercentAvailable.ToString("F")}% ({least.SpotsAvailable} spots free).");
             }
         }
 
