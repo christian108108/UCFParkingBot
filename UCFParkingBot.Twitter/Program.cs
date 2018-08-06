@@ -23,6 +23,8 @@ namespace UCFParkingBot.Twitter
             string output = parkingData.ToString();
 
             var garages = parkingData.Garages;
+            
+            // Log the full output of the parking data
             log.Info($"{output}");
 
 
