@@ -20,7 +20,6 @@ namespace UCFParkingBot.Twitter
         public static async System.Threading.Tasks.Task RunAsync([TimerTrigger("0 */15 * * * *")]TimerInfo myTimer, TraceWriter log)
         {
             var parkingData = new ParkingDataFunctions();
-            parkingData.SetParkingData();
             string output = parkingData.ToString();
 
             var garages = parkingData.Garages;

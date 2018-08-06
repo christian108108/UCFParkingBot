@@ -11,7 +11,7 @@ namespace UCFParkingBot.Library
         /// <summary>
         /// Sets parking data as a list of Garage objects with the appropriate data
         /// </summary>
-        public void SetParkingData()
+        public ParkingDataFunctions()
         {
             string html = @"https://secure.parking.ucf.edu/GarageCount/";
 
@@ -53,11 +53,6 @@ namespace UCFParkingBot.Library
         /// <returns>If parking data is set, this method will return a string of all the parking spots available per garage.</returns>
         public override string ToString()
         {
-            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
-            {
-                throw new InvalidOperationException("Parking data has not yet been set. Please use SetParkingData() before using this method.");
-            }
-
             List<string> listOfStrings = new List<string>
             {
                 "Spots available"
@@ -80,11 +75,6 @@ namespace UCFParkingBot.Library
         /// <returns>Garage object with the highest availability by percentage</returns>
         public Garage GetMostAvailableGarageByPercentage()
         {
-            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
-            {
-                throw new InvalidOperationException("Parking data has not yet been set. Please use SetParkingData() before using this method.");
-            }
-
             Garage mostAvailable = this.Garages[0];
             foreach (Garage g in this.Garages)
             {
@@ -104,11 +94,6 @@ namespace UCFParkingBot.Library
         /// <returns>Garage object with the highest availability by spots</returns>
         public Garage GetMostAvailableGarageBySpots()
         {
-            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
-            {
-                throw new InvalidOperationException("Parking data has not yet been set. Please use SetParkingData() before using this method.");
-            }
-
             Garage mostAvailable = this.Garages[0];
             foreach (Garage g in this.Garages)
             {
@@ -128,11 +113,6 @@ namespace UCFParkingBot.Library
         /// <returns>Garage object with the lowest availability by percentage</returns>
         public Garage GetLeastAvailableGarageByPercentage()
         {
-            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
-            {
-                throw new InvalidOperationException("Parking data has not yet been set. Please use SetParkingData() before using this method.");
-            }
-
             Garage leastAvailable = this.Garages[0];
             foreach (Garage g in this.Garages)
             {
@@ -152,11 +132,6 @@ namespace UCFParkingBot.Library
         /// <returns>Garage object with the lowest availability by spots</returns>
         public Garage GetLeastAvailableGarageBySpots()
         {
-            if (this.Garages == default(List<Garage>) || this.Garages.Count == 0)
-            {
-                throw new InvalidOperationException("Parking data has not yet been set. Please use SetParkingData() before using this method.");
-            }
-
             Garage leastAvailable = this.Garages[0];
             foreach (Garage g in this.Garages)
             {
