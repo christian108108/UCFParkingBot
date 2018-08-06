@@ -23,8 +23,7 @@ namespace UCFParkingBot.Twitter
             string output = parkingData.ToString();
 
             var garages = parkingData.Garages;
-            //log.Info($"\n{output}");
-
+            log.Info($"{output}");
 
 
             //If there are only 10% or fewer spots left, tweet!
