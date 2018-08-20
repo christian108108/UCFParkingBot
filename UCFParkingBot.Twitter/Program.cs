@@ -17,7 +17,7 @@ namespace UCFParkingBot.Twitter
         private static SecretBundle ACCESS_TOKEN_SECRET { get; set; }
 
         [FunctionName("TweetSpotsAvailable")]
-        public static async System.Threading.Tasks.Task RunAsync([TimerTrigger("0 */15 * * * *")]TimerInfo myTimer, TraceWriter log)
+        public static async System.Threading.Tasks.Task RunAsync([TimerTrigger("0 */15 * * * 1-5")]TimerInfo myTimer, TraceWriter log)
         {
             var parkingData = new ParkingDataFunctions();
             string output = parkingData.ToString();
