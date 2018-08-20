@@ -32,7 +32,7 @@ namespace UCFParkingBot.Twitter
             if ( parkingData.GetLeastAvailableGarageByPercentage().PercentAvailable < 10 )
             {
                 //get Twitter API keys from Key Vault
-                await SetTwitterKeysAsync();                
+                await SetTwitterKeysAsync();
 
                 //authenticate with Twitter
                 Auth.SetUserCredentials(CONSUMER_KEY.Value, CONSUMER_SECRET.Value, ACCESS_TOKEN.Value, ACCESS_TOKEN_SECRET.Value);
@@ -60,10 +60,10 @@ namespace UCFParkingBot.Twitter
                 new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
 
             // fetching keys from Azure Key Vault to use with Twitter's API
-            CONSUMER_KEY = await keyVaultClient.GetSecretAsync($"https://ucfparkingbot.vault.azure.net/secrets/twitter-consumer-key");
-            CONSUMER_SECRET = await keyVaultClient.GetSecretAsync($"https://ucfparkingbot.vault.azure.net/secrets/twitter-consumer-secret");
-            ACCESS_TOKEN = await keyVaultClient.GetSecretAsync($"https://ucfparkingbot.vault.azure.net/secrets/twitter-access-token");
-            ACCESS_TOKEN_SECRET = await keyVaultClient.GetSecretAsync($"https://ucfparkingbot.vault.azure.net/secrets/twitter-access-token-secret");
+            CONSUMER_KEY = await keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-key");
+            CONSUMER_SECRET = await keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-secret");
+            ACCESS_TOKEN = await keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token");
+            ACCESS_TOKEN_SECRET = await keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token-secret");
         }
     }
 }
