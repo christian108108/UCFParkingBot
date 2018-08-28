@@ -20,6 +20,7 @@ namespace UCFParkingBot.Library
             var htmlDoc = web.Load(html);
 
             var nodes = htmlDoc.DocumentNode.SelectNodes("//strong");
+            nodes.RemoveAt(nodes.Count - 1);
 
             List<Garage> garages = new List<Garage>
             {
@@ -29,7 +30,6 @@ namespace UCFParkingBot.Library
                 new Garage( "Garage D", 1241 ),
                 new Garage( "Garage H", 1284 ),
                 new Garage( "Garage I", 1231 ),
-                new Garage( "Libra Garage", 1007 )
             };
 
             int i = 0;
@@ -57,6 +57,7 @@ namespace UCFParkingBot.Library
             {
                 "Spots available"
             };
+            
 
             foreach (Garage garage in this.Garages)
             {
