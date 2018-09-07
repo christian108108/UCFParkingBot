@@ -12,29 +12,28 @@ namespace UCFParkingBot.Twitter
         public static void Run([TimerTrigger("0 */15 * * * 1-5")]TimerInfo myTimer, TraceWriter log)
         {
             ParkingDataFunctions.SetParkingData();
-            string output = ParkingDataFunctions.ParkingData();
+            string output = ParkingDataFunctions.ParkingDataAsString();
             
             // Log the full output of the parking data
             log.Info($"{output}");
 
 
 
-            Garage least = ParkingDataFunctions.GetLeastAvailableGarageBySpots();
+            Garage leastAvailableGarage = ParkingDataFunctions.GetLeastAvailableGarageBySpots();
             //If there are fewer than 100 spots left, tweet!
-            if ( least.SpotsAvailable < 100 )
+            if ( leastAvailableGarage.SpotsAvailable < 100 )
             {
-                //get Twitter API keys from Key Vault
+                //get Twitter API keys from Key Vault and authenticate with Twitter
                 TwitterFunctions.SetTwitterKeys();
-
-                //authenticate with Twitter
-                Auth.SetUserCredentials(TwitterFunctions.CONSUMER_KEY, TwitterFunctions.CONSUMER_SECRET, TwitterFunctions.ACCESS_TOKEN, TwitterFunctions.ACCESS_TOKEN_SECRET);
 
                 Tweet.PublishTweet(output);
                 log.Info($"Tweet published at {DateTime.UtcNow} UTC!");
+
+                TwitterFunctions.CleanUpTimeline();
             }
             else
             {
-                log.Info($"Tweet not published at {DateTime.UtcNow} UTC. Garage with least availability: {least.Name} with {least.SpotsAvailable} spots free.");
+                log.Info($"Tweet not published at {DateTime.UtcNow} UTC. Garage with least availability: {leastAvailableGarage.Name} with {leastAvailableGarage.SpotsAvailable} spots free.");
             }
         }
     }

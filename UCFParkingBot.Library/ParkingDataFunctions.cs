@@ -56,7 +56,7 @@
         /// Makes pretty string to either tweet, message, speak, etc. with the name and number of spots available per garage.
         /// </summary>
         /// <returns>If parking data is set, this method will return a string of all the parking spots available per garage.</returns>
-        public static string ParkingData()
+        public static string ParkingDataAsString()
         {
             // if parking data hasn't been set, throw an error
             if (Garages.Count == 0 || Garages == null)
