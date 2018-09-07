@@ -1,17 +1,17 @@
-﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-
-namespace UCFParkingBot.Library
+﻿namespace UCFParkingBot.Library
 {
-    public class ParkingDataFunctions
+    using System;
+    using HtmlAgilityPack;
+    using System.Collections.Generic;
+
+    public static class ParkingDataFunctions
     {
-        public List<Garage> Garages { get; private set; }
+        public static List<Garage> Garages { get; private set; }
 
         /// <summary>
         /// Sets parking data as a list of Garage objects with the appropriate data
         /// </summary>
-        public ParkingDataFunctions()
+        public static void SetParkingData()
         {
             string html = @"https://secure.parking.ucf.edu/GarageCount/";
 
@@ -20,7 +20,12 @@ namespace UCFParkingBot.Library
             var htmlDoc = web.Load(html);
 
             var nodes = htmlDoc.DocumentNode.SelectNodes("//strong");
-            nodes.RemoveAt(nodes.Count - 1);
+
+            // if Libra garage is still listed, remove it! It's residential, so no need to tweet about it.
+            if (nodes.Count == 7)
+            {
+                nodes.RemoveAt(nodes.Count - 1);
+            }
 
             List<Garage> garages = new List<Garage>
             {
@@ -44,22 +49,28 @@ namespace UCFParkingBot.Library
                 i++;
             }
 
-            this.Garages = garages;
+            Garages = garages;
         }
 
         /// <summary>
         /// Makes pretty string to either tweet, message, speak, etc. with the name and number of spots available per garage.
         /// </summary>
         /// <returns>If parking data is set, this method will return a string of all the parking spots available per garage.</returns>
-        public override string ToString()
+        public static string ParkingData()
         {
+            // if parking data hasn't been set, throw an error
+            if (Garages.Count == 0 || Garages == null)
+            {
+                throw new InvalidOperationException("Use SetParkingData() before using this method.");
+            }
+
             List<string> listOfStrings = new List<string>
             {
                 "Spots available"
             };
             
 
-            foreach (Garage garage in this.Garages)
+            foreach (Garage garage in Garages)
             {
                 listOfStrings.Add($"{garage.Name}: {garage.SpotsAvailable}");
             }
@@ -74,10 +85,16 @@ namespace UCFParkingBot.Library
         /// </summary>
         /// <example>Garage with 75% spots free, when all other garages have less than 75% spots free.</example>
         /// <returns>Garage object with the highest availability by percentage</returns>
-        public Garage GetMostAvailableGarageByPercentage()
+        public static Garage GetMostAvailableGarageByPercentage()
         {
-            Garage mostAvailable = this.Garages[0];
-            foreach (Garage g in this.Garages)
+            // if parking data hasn't been set, throw an error
+            if (Garages.Count == 0 || Garages == null)
+            {
+                throw new InvalidOperationException("Use SetParkingData() before using this method.");
+            }
+
+            Garage mostAvailable = Garages[0];
+            foreach (Garage g in Garages)
             {
                 if (g.PercentAvailable > mostAvailable.PercentAvailable)
                 {
@@ -93,10 +110,16 @@ namespace UCFParkingBot.Library
         /// </summary>
         /// <example>Garage with 500 spots free, when all other garages have fewer than 500 spots free.</example>
         /// <returns>Garage object with the highest availability by spots</returns>
-        public Garage GetMostAvailableGarageBySpots()
+        public static Garage GetMostAvailableGarageBySpots()
         {
-            Garage mostAvailable = this.Garages[0];
-            foreach (Garage g in this.Garages)
+            // if parking data hasn't been set, throw an error
+            if (Garages.Count == 0 || Garages == null)
+            {
+                throw new InvalidOperationException("Use SetParkingData() before using this method.");
+            }
+
+            Garage mostAvailable = Garages[0];
+            foreach (Garage g in Garages)
             {
                 if (g.SpotsAvailable > mostAvailable.SpotsAvailable)
                 {
@@ -112,10 +135,16 @@ namespace UCFParkingBot.Library
         /// </summary>
         /// <example>Garage with 8% spots free, when all other garages have more than 8% spots free.</example>
         /// <returns>Garage object with the lowest availability by percentage</returns>
-        public Garage GetLeastAvailableGarageByPercentage()
+        public static Garage GetLeastAvailableGarageByPercentage()
         {
-            Garage leastAvailable = this.Garages[0];
-            foreach (Garage g in this.Garages)
+            // if parking data hasn't been set, throw an error
+            if (Garages.Count == 0 || Garages == null)
+            {
+                throw new InvalidOperationException("Use SetParkingData() before using this method.");
+            }
+
+            Garage leastAvailable = Garages[0];
+            foreach (Garage g in Garages)
             {
                 if (g.PercentAvailable < leastAvailable.PercentAvailable)
                 {
@@ -131,10 +160,16 @@ namespace UCFParkingBot.Library
         /// </summary>
         /// <example>Garage with 10 spots free, when all other garages have more than 10 spots free.</example>
         /// <returns>Garage object with the lowest availability by spots</returns>
-        public Garage GetLeastAvailableGarageBySpots()
+        public static Garage GetLeastAvailableGarageBySpots()
         {
-            Garage leastAvailable = this.Garages[0];
-            foreach (Garage g in this.Garages)
+            // if parking data hasn't been set, throw an error
+            if (Garages.Count == 0 || Garages == null)
+            {
+                throw new InvalidOperationException("Use SetParkingData() before using this method.");
+            }
+
+            Garage leastAvailable = Garages[0];
+            foreach (Garage g in Garages)
             {
                 if (g.SpotsAvailable < leastAvailable.SpotsAvailable)
                 {
