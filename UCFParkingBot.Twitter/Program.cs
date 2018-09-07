@@ -21,7 +21,7 @@ namespace UCFParkingBot.Twitter
 
             Garage least = ParkingDataFunctions.GetLeastAvailableGarageBySpots();
             //If there are fewer than 100 spots left, tweet!
-            if ( least.PercentAvailable < 100 )
+            if ( least.SpotsAvailable < 100 )
             {
                 //get Twitter API keys from Key Vault
                 TwitterFunctions.SetTwitterKeys();
