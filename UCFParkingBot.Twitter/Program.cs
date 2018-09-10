@@ -24,12 +24,19 @@ namespace UCFParkingBot.Twitter
             if ( leastAvailableGarage.SpotsAvailable < 100 )
             {
                 //get Twitter API keys from Key Vault and authenticate with Twitter
-                TwitterFunctions.SetTwitterKeys();
+                TwitterFunctions.LoginToTwitter();
 
-                Tweet.PublishTweet(output);
-                log.Info($"Tweet published at {DateTime.UtcNow} UTC!");
+                var newTweet = Tweet.PublishTweet(output);
+                if (newTweet.IsTweetPublished)
+                {
+                    log.Info($"Tweet published at {DateTime.UtcNow} UTC!");
+                    TwitterFunctions.CleanUpTimeline(3);
+                }
+                else
+                {
+                    log.Error($"Tweet could not be published at {DateTime.UtcNow} UTC!");
+                }
 
-                TwitterFunctions.CleanUpTimeline();
             }
             else
             {
