@@ -107,17 +107,18 @@
             int i = 0;
             foreach (var tweet in timeline)
             {
-                if (i >= recentTweetsToKeep &&
-                    !tweet.IsTweetDestroyed &&
+                if (tweet.Text.StartsWith("Spots available") &&
                     !tweet.Favorited &&
                     !tweet.Retweeted &&
                     (tweet.QuoteCount == 0 || tweet.QuoteCount == null) &&
-                    (tweet.ReplyCount == 0 || tweet.ReplyCount == null) &&
-                    tweet.Text.StartsWith("Spots available"))
+                    (tweet.ReplyCount == 0 || tweet.ReplyCount == null))
                 {
-                    deletableTweets.Add(tweet);
+                    if(i >= recentTweetsToKeep)
+                    {
+                        deletableTweets.Add(tweet);
+                    }
+                    i++;
                 }
-                i++;
             }
 
             return deletableTweets;
