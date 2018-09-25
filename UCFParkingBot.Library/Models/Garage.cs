@@ -6,8 +6,8 @@
         public int SpotsAvailable;
         public decimal PercentAvailable { get; private set; }
 
-        public Garage(string name, int maxSpots, double latitude, double longitude, int spotsAvailable = 0 )
-            : base(name, latitude, longitude)
+        public Garage(string name, int maxSpots, double[] coordinates, int spotsAvailable = 0 )
+            : base(name, coordinates)
         {
             this.MaxSpots = maxSpots;
             this.SpotsAvailable = spotsAvailable;

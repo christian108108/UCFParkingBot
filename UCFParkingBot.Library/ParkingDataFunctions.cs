@@ -29,12 +29,12 @@
 
             List<Garage> garages = new List<Garage>
             {
-                new Garage( "Garage A", 1623, 28.599613000000002, -81.205016000000001 ),
-                new Garage( "Garage B", 1259, 28.596894840943857, -81.199806207588182),
-                new Garage( "Garage C", 1852, 28.60190616876525, -81.19560050385283 ),
-                new Garage( "Garage D", 1241, 28.605372511338587, -81.197520965507493),
-                new Garage( "Garage H", 1284, 28.604800000000001, -81.200800000000001 ),
-                new Garage( "Garage I", 1231, 28.601134467682712, -81.205452257564559 ),
+                new Garage( "Garage A", 1623, new double[]{28.599613000000002, -81.205016000000001} ),
+                new Garage( "Garage B", 1259, new double[]{28.596894840943857, -81.199806207588182} ),
+                new Garage( "Garage C", 1852, new double[]{28.60190616876525,  -81.19560050385283} ),
+                new Garage( "Garage D", 1241, new double[]{28.605372511338587, -81.197520965507493} ),
+                new Garage( "Garage H", 1284, new double[]{28.604800000000001, -81.200800000000001} ),
+                new Garage( "Garage I", 1231, new double[]{28.601134467682712, -81.205452257564559} ),
             };
 
             int i = 0;
