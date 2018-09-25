@@ -1,12 +1,13 @@
 namespace UCFParkingBot.Library
 {
     using System;
-    using HtmlAgilityPack;
+    using System.Net.Http;
     using System.Collections.Generic;
+    using Microsoft.Azure.KeyVault;
 
     public static class GoogleMapsFunctions
     {
-        public static string GenerateURI(Building origin, Building destination)
+        public static string GenerateURI(Building origin, Building destination, string APIKey)
         {
             // checking to see if anything is null...
             if(origin == null ||
@@ -24,18 +25,18 @@ namespace UCFParkingBot.Library
 
 
             // building the URI...
-            var uriBuilder = new UriBuilder("https://www.google.com/")
+            var uriBuilder = new UriBuilder("https://maps.googleapis.com")
             {
-                Path = "/maps/dir/",
+                Path = "/maps/api/directions/json",
             };
 
             // collecting all the query parameters before I join them
             var queryParams = new List<string>()
             {
-                "?api=1",
                 $"origin={originCoords}",
                 $"destination={destinationCoords}",
-                "travelmode=walking"
+                "mode=walking",
+                $"key={APIKey}"
             };
 
             // joining the parameters with &s
@@ -43,6 +44,31 @@ namespace UCFParkingBot.Library
             uriBuilder.Query = string.Join("&", queryParams);
 
             return uriBuilder.Uri.ToString();
+        }
+    
+        ///
+        /// Returns formatted JSON response from the Google Maps API
+        ///
+        public static string GetWalkingDirections(Building origin, Building destination, string APIKey)
+        {
+            string googleReq = GoogleMapsFunctions.GenerateURI(origin, destination, APIKey);
+
+            HttpClient client = new HttpClient();
+            
+            var response = client.GetAsync(googleReq).Result.Content;
+
+            var data = response.ReadAsStringAsync().Result;
+
+            return data;
+        }
+        public static string GetGoogleMapsAPIKey()
+        {
+            if (AzureFunctions.keyVaultClient == null)
+            {
+                AzureFunctions.LoginToKeyVault();
+            }
+
+            return AzureFunctions.keyVaultClient.GetSecretAsync("https://ucfparkingbot-keyvault.vault.azure.net/","google-maps-key").Result.Value;
         }
     }
 }

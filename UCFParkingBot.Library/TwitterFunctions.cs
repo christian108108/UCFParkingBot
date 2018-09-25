@@ -1,7 +1,6 @@
 ﻿namespace UCFParkingBot.Library
 {
     using Microsoft.Azure.KeyVault;
-    using Microsoft.Azure.Services.AppAuthentication;
     using System;
     using System.Collections.Generic;
     using System.Linq;
