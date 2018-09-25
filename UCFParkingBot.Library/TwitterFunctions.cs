@@ -21,17 +21,17 @@
         /// <returns>void</returns>
         public static void LoginToTwitter()
         {
-            // authenticating with Azure Managed Service Identity
-            AzureServiceTokenProvider azureServiceTokenProvider = new AzureServiceTokenProvider();
-
-            var keyVaultClient = new KeyVaultClient(
-                new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
+            // if we haven't logged into KeyVault yet
+            if (AzureFunctions.keyVaultClient == null)
+            {
+                AzureFunctions.LoginToKeyVault();
+            }
 
             // fetching keys from Azure Key Vault to use with Twitter's API
-            CONSUMER_KEY = keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-key").Result.Value;
-            CONSUMER_SECRET = keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-secret").Result.Value;
-            ACCESS_TOKEN = keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token").Result.Value;
-            ACCESS_TOKEN_SECRET = keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token-secret").Result.Value;
+            CONSUMER_KEY = AzureFunctions.keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-key").Result.Value;
+            CONSUMER_SECRET = AzureFunctions.keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-secret").Result.Value;
+            ACCESS_TOKEN = AzureFunctions.keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token").Result.Value;
+            ACCESS_TOKEN_SECRET = AzureFunctions.keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token-secret").Result.Value;
 
             if (string.IsNullOrWhiteSpace(CONSUMER_KEY) ||
                 string.IsNullOrWhiteSpace(CONSUMER_SECRET) ||
@@ -57,19 +57,19 @@
         /// </summary>
         public static Dictionary<string, string> GetTwitterKeys()
         {
-            // authenticating with Azure Managed Service Identity
-            AzureServiceTokenProvider azureServiceTokenProvider = new AzureServiceTokenProvider();
-
-            var keyVaultClient = new KeyVaultClient(
-                new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
+            // if we haven't logged into KeyVault yet
+            if (AzureFunctions.keyVaultClient == null)
+            {
+                AzureFunctions.LoginToKeyVault();
+            }
 
             Dictionary<string, string> twitterKeys = new Dictionary<string, string>();
 
             // fetching keys from Azure Key Vault to use with Twitter's API
-            CONSUMER_KEY = keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-key").Result.Value;
-            CONSUMER_SECRET = keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-secret").Result.Value;
-            ACCESS_TOKEN = keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token").Result.Value;
-            ACCESS_TOKEN_SECRET = keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token-secret").Result.Value;
+            CONSUMER_KEY = AzureFunctions.keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-key").Result.Value;
+            CONSUMER_SECRET = AzureFunctions.keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-consumer-secret").Result.Value;
+            ACCESS_TOKEN = AzureFunctions.keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token").Result.Value;
+            ACCESS_TOKEN_SECRET = AzureFunctions.keyVaultClient.GetSecretAsync($"https://ucfparkingbot-keyvault.vault.azure.net/", "twitter-access-token-secret").Result.Value;
 
             if (string.IsNullOrWhiteSpace(CONSUMER_KEY) ||
                 string.IsNullOrWhiteSpace(CONSUMER_SECRET) ||
