@@ -4,7 +4,7 @@ namespace UCFParkingBot.Library
     using HtmlAgilityPack;
     using System.Collections.Generic;
 
-    public static class GoogleMapsDirections
+    public static class GoogleMapsFunctions
     {
         public static string GenerateURI(Building origin, Building destination)
         {
