@@ -3,6 +3,8 @@ namespace UCFParkingBot.Library
 {
     using Microsoft.Azure.KeyVault;
     using Microsoft.Azure.Services.AppAuthentication;
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Table;
 
     public static class AzureFunctions
     {
@@ -16,6 +18,19 @@ namespace UCFParkingBot.Library
             AzureFunctions.keyVaultClient = new KeyVaultClient(
                 new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback));
 
+        }
+
+        public static CloudTable GetStorageTableReference(string reference)
+        {
+            // grabbing connection string from KeyVault
+            string storageConnectionString = AzureFunctions.keyVaultClient.GetSecretAsync("https://ucfparkingbot-keyvault.vault.azure.net/", "StorageConnectionString").Result.Value;
+            
+            // using connection string to authenticate with Azure Storage
+            CloudStorageAccount account = CloudStorageAccount.Parse(storageConnectionString);
+
+            CloudTableClient serviceClient = account.CreateCloudTableClient();
+
+            return serviceClient.GetTableReference(reference);
         }
     }
 }
