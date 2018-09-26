@@ -5,8 +5,9 @@ namespace UCFParkingBot.Library
     using System.Globalization;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
+    using Microsoft.WindowsAzure.Storage.Table;
     
-    public partial class Building
+    public partial class Building : TableEntity
     {
 
         [JsonProperty("name")]
@@ -29,6 +30,10 @@ namespace UCFParkingBot.Library
 
         public Building(string name, double[] coordinates, string abbreviation = null)
         {
+            // for Azure Table Storage
+            this.PartitionKey = "building";
+            this.RowKey = this.Id;
+
             this.Name = name;
             this.Coordinates = coordinates;
             if(!string.IsNullOrWhiteSpace(abbreviation))

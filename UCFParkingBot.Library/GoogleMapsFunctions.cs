@@ -61,14 +61,17 @@ namespace UCFParkingBot.Library
 
             return data;
         }
-        public static string GetGoogleMapsAPIKey()
+        public static string GoogleMapsAPIKey
         {
-            if (AzureFunctions.keyVaultClient == null)
+            get
             {
-                AzureFunctions.LoginToKeyVault();
-            }
+                if (AzureFunctions.keyVaultClient == null)
+                {
+                    AzureFunctions.LoginToKeyVault();
+                }
 
-            return AzureFunctions.keyVaultClient.GetSecretAsync("https://ucfparkingbot-keyvault.vault.azure.net/","google-maps-key").Result.Value;
+                return AzureFunctions.keyVaultClient.GetSecretAsync("https://ucfparkingbot-keyvault.vault.azure.net/", "google-maps-key").Result.Value;
+            }
         }
     }
 }

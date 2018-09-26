@@ -9,6 +9,9 @@
         public Garage(string name, int maxSpots, double[] coordinates, int spotsAvailable = 0 )
             : base(name, coordinates)
         {
+            this.PartitionKey = "garage";
+            this.RowKey = name;
+
             this.MaxSpots = maxSpots;
             this.SpotsAvailable = spotsAvailable;
             SetPercentAvailable();
