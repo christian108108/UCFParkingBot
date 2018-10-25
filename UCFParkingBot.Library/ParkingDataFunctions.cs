@@ -44,7 +44,6 @@
                 {
                     int.TryParse(node.InnerText, out int spotsAvailable);
                     garages[i].SpotsAvailable = spotsAvailable;
-                    garages[i].SetPercentAvailable();
                 }
                 i++;
             }
