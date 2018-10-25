@@ -67,7 +67,7 @@ namespace UCFParkingBot.Library
             {
                 if (AzureFunctions.keyVaultClient == null)
                 {
-                    AzureFunctions.LoginToKeyVault();
+                    AzureFunctions.LogIntoKeyVault();
                 }
 
                 return AzureFunctions.keyVaultClient.GetSecretAsync("https://ucfparkingbot-keyvault.vault.azure.net/", "google-maps-key").Result.Value;

@@ -23,7 +23,7 @@
             // if we haven't logged into KeyVault yet
             if (AzureFunctions.keyVaultClient == null)
             {
-                AzureFunctions.LoginToKeyVault();
+                AzureFunctions.LogIntoKeyVault();
             }
 
             // fetching keys from Azure Key Vault to use with Twitter's API
@@ -59,7 +59,7 @@
             // if we haven't logged into KeyVault yet
             if (AzureFunctions.keyVaultClient == null)
             {
-                AzureFunctions.LoginToKeyVault();
+                AzureFunctions.LogIntoKeyVault();
             }
 
             Dictionary<string, string> twitterKeys = new Dictionary<string, string>();
