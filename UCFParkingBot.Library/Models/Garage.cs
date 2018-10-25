@@ -4,7 +4,7 @@
     {
         public readonly int MaxSpots;
         public int SpotsAvailable;
-        public decimal PercentAvailable { get; private set; }
+        public decimal PercentAvailable { get => this.SpotsAvailable / this.MaxSpots * 100; }
 
         public Garage(string name, int maxSpots, double[] coordinates, int spotsAvailable = 0 )
             : base(name, coordinates)
@@ -14,12 +14,6 @@
 
             this.MaxSpots = maxSpots;
             this.SpotsAvailable = spotsAvailable;
-            SetPercentAvailable();
-        }
-
-        public void SetPercentAvailable()
-        {
-            this.PercentAvailable = (decimal)SpotsAvailable / MaxSpots * 100;
         }
     }
 }
