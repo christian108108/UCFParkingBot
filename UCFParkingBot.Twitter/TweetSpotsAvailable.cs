@@ -13,9 +13,8 @@ namespace UCFParkingBot.Twitter
         {
             ParkingDataFunctions.SetParkingData();
             string parkingData = ParkingDataFunctions.ParkingDataAsString();
-            
             // Log the full output of the parking data
-            log.LogInformation($"{parkingData}");
+            log.LogInformation(parkingData);
 
             Garage leastAvailableGarage = ParkingDataFunctions.GetLeastAvailableGarageBySpots();
             //If there are fewer than 100 spots left, tweet!

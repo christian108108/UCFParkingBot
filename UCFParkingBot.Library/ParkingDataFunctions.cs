@@ -29,23 +29,22 @@ namespace UCFParkingBot.Library
 
             List<Garage> garages = new List<Garage>
             {
-                new Garage( "Garage A", 1623),
-                new Garage( "Garage B", 1259),
-                new Garage( "Garage C", 1852),
-                new Garage( "Garage D", 1241),
-                new Garage( "Garage H", 1284),
-                new Garage( "Garage I", 1231),
+                new Garage("Garage A", 1623),
+                new Garage("Garage B", 1259),
+                new Garage("Garage C", 1852),
+                new Garage("Garage D", 1241),
+                new Garage("Garage H", 1284),
+                new Garage("Garage I", 1231),
             };
 
             int i = 0;
             foreach (var node in nodes)
             {
-                if (node.NodeType == HtmlNodeType.Element)
-                {
-                    int.TryParse(node.InnerText, out int spotsAvailable);
-                    garages[i].SpotsAvailable = spotsAvailable;
-                }
+                int.TryParse(node.InnerText, out int spotsAvailable);
+                garages[i].SpotsAvailable = spotsAvailable;
                 i++;
+                if (i >= garages.Count)
+                    break;
             }
 
             Garages = garages;
